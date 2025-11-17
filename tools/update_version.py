@@ -1,5 +1,5 @@
 text = ''
-with open('./src/pycode_info/__init__.py') as f:
+with open('./pig_ui/__init__.py') as f:
     for line in f:
         if line.startswith('__version__'):
             version = line.split('=')[1].strip().strip('"').strip("'")
@@ -10,5 +10,5 @@ with open('./src/pycode_info/__init__.py') as f:
         else:
             text += line
         
-with open('./src/pycode_info/__init__.py', 'w') as fw:
+with open('./pig_ui/__init__.py', 'w') as fw:
     fw.write(text)
