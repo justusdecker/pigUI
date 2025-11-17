@@ -1,2 +1,2 @@
 all:
-	echo
+	python ./tools/update_version.py
