@@ -1,6 +1,6 @@
-## 💡 PyNodle: A Pygame-Based Node Editor Framework
+## A Pygame-Based UI Element Framework
 
-PyNodle is a modular, event-driven framework built on **Pygame** designed for creating **node-based editors** and visual programming interfaces. It provides all the necessary low-level components—from a robust UI manager and specialized widgets to a smooth Bézier curve drawing utility—to quickly prototype and build graphical programming tools.
+pigUI is a modular, event-driven framework built on **Pygame** designed for creating **ui / ui-styles(ux)**. It provides all the necessary low-level components—from a robust UI manager and specialized widgets to a smooth Bézier curve drawing utility—to quickly prototype and build graphical programming tools.
 
 ---
 
