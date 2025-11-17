@@ -3,7 +3,7 @@ on:
     branches:
       - main
 env:
-  PACKAGE_NAME: pig_ui
+  PACKAGE_NAME: jmpUI
   OWNER: Justusdecker
 
 jobs:
