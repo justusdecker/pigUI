@@ -1,4 +1,4 @@
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 from pig_ui.ui.ux_element import (
     UXWrapper, 
     UXText, 
