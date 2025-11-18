@@ -55,7 +55,7 @@ def main():
                 "git", "commit", "-m", commit_msg, relative_path
             ])
 
-    yn = input(f"Push all changes\033[32m?[y/any]").strip()
+    yn = input(f"Push all changes?[\033[36my/any\033[0m]\033[32m").strip()
     print('\033[0m',end='')
     if yn =='y':
         _, returncode = run_git_command(["git", "push"])
