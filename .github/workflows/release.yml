@@ -28,12 +28,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 🛑 CRITICAL STEP: Install SDL Dependencies 🛑
-      - name: Install Pygame/SDL Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -58,7 +53,7 @@ jobs:
         id: get_version
         run: |
           PVERSION="versions.env"
-          echo "VERSION=$(PYGAME_HIDE_SUPPORT_PROMPT=1 python -c 'import pig_ui; print(pig_ui.__version__)')" >> $GITHUB_ENV
+          echo "VERSION=$(python -c 'import pig_ui; print(pig_ui.__version__)')" >> $GITHUB_ENV
           echo $GITHUB_ENV
       - name: Create GitHub Release
         id: create_release
