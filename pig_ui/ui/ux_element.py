@@ -1,14 +1,4 @@
 from pig_ui.constants import *
-from pygame import Surface, SRCALPHA
-from pygame.draw import rect as rect_draw
-
-"""
-+ Add UXText
-. Test the UX Elements
-+ Add the UX to UI
-"""
-
-
 
 class UXParameterError(Exception):
     """"""
