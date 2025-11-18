@@ -1,14 +1,10 @@
 from pig_ui.ui.ui_element import UIElement
 from pig_ui.ui.ui_textinput import UITextInput
-from pig_ui.ui.ux_element import UXElement, UXImage, UXWrapper
-from numpy import array, zeros, uint8
+from pig_ui.ui.ux_element import UXImage, UXWrapper
+from numpy import zeros, uint8
 from numpy.typing import NDArray
-from colorsys import rgb_to_hsv,hsv_to_rgb
+from colorsys import rgb_to_hsv
 from pig_ui.constants import *
-from pygame.surfarray import make_surface
-from pygame.transform import scale
-from pygame.mouse import get_pos
-from pygame import Color, Surface, SRCALPHA
 from math import floor
 from pig_ui.ui.ux_element import UXRect, UXText
 
