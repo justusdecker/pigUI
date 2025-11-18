@@ -9,12 +9,17 @@ def run_git_command(command_list):
             check=False,
             cwd=os.getcwd()
         )
-        return result.stdout.strip(), result.stderr.strip(), result.returncode
+        return result.stdout.strip() + result.stderr.strip(), result.returncode
     except FileNotFoundError:
         err("Error: 'git' command not found. Ensure Git is installed and in your PATH.")
         exit(1)
 def err(text: str) -> str:
     return f'\033[33m{text}\033[0m'
+def custom_rules(fp: str) -> bool:
+    fp = fp.replace('\\','/')
+    if fp == 'pig_ui/__init__.py':
+        return '[auto] update version'
+
 def main():
     for root, _, files in os.walk(os.getcwd()):
         if '.git' in root:
@@ -26,24 +31,34 @@ def main():
 
             relative_path = os.path.relpath(file_path, os.getcwd())
 
-            print(f"Processing File: {relative_path}")
-            
             run_git_command(["git", "add", relative_path])
 
-            _, _, returncode = run_git_command(["git", "diff", "--cached", "--quiet", relative_path])
-
+            gi, returncode = run_git_command(["git", "diff", "--cached", "--quiet", relative_path])
+            if '.gitignore' in gi:
+                err(f"SKIP: {relative_path} is in .gitignore")
             if returncode == 0: 
                 err(f"SKIP: No changes detected for '{relative_path}' since last commit.")
                 continue
-            
-            while True:
-                commit_msg = input(f"Enter commit message for '{relative_path}': ").strip()
-                if commit_msg:
-                    break
-                err("Commit message cannot be empty.")
-            
-            stdout, stderr, returncode = run_git_command([
+            cr = custom_rules(relative_path)
+            if not cr:
+                
+                while True:
+                    commit_msg = input(f"Enter commit message for '\033[36m{relative_path}\033[0m': \033[32m").strip()
+                    print('\033[0m',end='')
+                    if commit_msg:
+                        break
+                    err("Commit message cannot be empty.")
+            else:
+                commit_msg = cr
+                print(f'\033[30mAuto Commit for: {relative_path}\033[0m')
+            _, returncode = run_git_command([
                 "git", "commit", "-m", commit_msg, relative_path
             ])
+
+    yn = input(f"Push all changes\033[32m?[y/any]").strip()
+    print('\033[0m',end='')
+    if yn =='y':
+        _, returncode = run_git_command(["git", "push"])
+
 
 main()
