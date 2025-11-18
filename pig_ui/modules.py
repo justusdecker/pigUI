@@ -1,12 +1,15 @@
-from pygame import Color, Surface, Vector2, Rect
-from pygame.surfarray import make_surface
+try:
+    from pygame import Color, Surface, Vector2, Rect
+    from pygame.surfarray import make_surface
 
-import pygame as pg
-import json, os
-import random
-from time import time
-pg.font.init()
-from typing import Callable
+    import pygame as pg
+    import json, os
+    import random
+    from time import time
+    pg.font.init()
+    from typing import Callable
+except:
+    ...
 
 # A workaround for the error: subprocess-exited-with-error
 # Fixed by simply not packaging pygame into the package
@@ -26,4 +29,4 @@ class pygame2:
         def circle(): ...
         def rect(): ...
 
-PYGAME_CALLS = pygame2()
+PC = pygame2()
