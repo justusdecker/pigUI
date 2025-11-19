@@ -15,6 +15,61 @@ ANCHORS = {'t': 0.0, 'c': 0.5, 'b': 1.0, 'l': 0.0, 'r': 1.0}
 
 class UIElement: ...
 class UIElement:
+    """
+    The Base-Class for all UIElements
+    ***
+    A UIElement supports by default the following events & its corresponding callbacks:
+    |key|callback name|
+    |---|---|
+    |cb_lclick|left click|
+    |cb_dclick|double click|
+    |cb_rclick|right click|
+    |cb_unclick|release|
+    |cb_hover|hover|
+    |cb_unhover|unhover|
+    |cb_drag|drag|
+    |cb_wheel|scroll|
+    |cb_keypress|keypress|
+    
+    ## Params
+    #### app
+    :key key1:
+    The UI Element needs this to:
+    - blit to the window
+    - retreive events
+    
+    #### pos
+    This is the Offset to the parent. If no parent is given, use pos+(0,0) as start.
+
+    #### size
+    Used to determine the Default UXElement size & the bounding box
+
+    > [!NOTE]
+    > You should not change the size in the lifetime, only in the init state.
+    > You must change the UXElement sizes manually!
+    
+    #### ux
+    Must be a UXWrapper Object.
+    
+    `ux` is used for styling the UIElement, for more info: look into the UXElement Docs.
+    
+    #### kwargs
+    event
+    group
+    layer
+    o_layer
+    visible
+    anchor
+    parent
+    draggable
+    blocked
+    click_offset
+    uid
+     
+    ## Attributes
+    
+    
+    """
     #! Fix click in non hover state -> sliding into uie will count as click
     """
     The Base Class for UIElements
