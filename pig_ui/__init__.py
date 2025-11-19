@@ -1,8 +1,10 @@
-__version__ = "0.1.27"
+__version__ = "0.1.28"
 from pig_ui.ui.ux_element import (
     UXWrapper, 
     UXText, 
-    UXRect
+    UXRect,
+    UXImage,
+    UXCircle
 )
 from pig_ui.ui.ui_element import UIElement
 from pig_ui.ui.ui_textinput import UITextInput
