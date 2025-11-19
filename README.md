@@ -1,5 +1,7 @@
 ## A Pygame-Based UI Element Framework
 
+<img src="./data/pigui_logo.png" width="25%">
+
 pigUI is a modular, event-driven framework built on **Pygame** designed for creating **ui / ui-styles(ux)**. It provides all the necessary low-level components—from a robust UI manager and specialized widgets to a smooth Bézier curve drawing utility—to quickly prototype and build graphical programming tools.
 
 ---
