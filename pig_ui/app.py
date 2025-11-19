@@ -1,12 +1,13 @@
 from pig_ui.constants import *
 from pig_ui.events import Events
 from pig_ui.ui.ui_element import UIM
+
 class App:
     def __init__(self):
         self.is_running = True
-        self.window = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        pg.display.set_caption("PyNodle")
-        self.clock = pg.time.Clock()
+        self.window = PG.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        PG.display.set_caption("PyNodle")
+        self.clock = PG.time.Clock()
         self.events = Events()
         
     def run(self):
@@ -23,10 +24,10 @@ class App:
         self.clock.tick(60)
     def draw(self):
         if self.events.MOUSE_LEFT:
-            pg.draw.circle(self.window,(128,128,0),self.events.MOUSE_POS,8,3)
+            PG.draw.circle(self.window,(128,128,0),self.events.MOUSE_POS,8,3)
         if self.events.DOUBLE_CLICK:
-            pg.draw.circle(self.window,(0,128,128),self.events.MOUSE_POS,16,3)
-        pg.display.update()
+            PG.draw.circle(self.window,(0,128,128),self.events.MOUSE_POS,16,3)
+        PG.display.update()
         
     def event_handler(self):
         self.events.recv_events()
