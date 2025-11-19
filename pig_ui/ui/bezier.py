@@ -1,9 +1,9 @@
 from pig_ui.constants import *
 
-def draw_beziere(screen, control_points, numPoints = None,color=WHITE, width=1):
+def draw_beziere(screen, control_points, numPoints = None,color=Color('#ffffff'), width=1):
     control_points = [Vector2(f,g) for f,g in control_points]
     b_points = compute_bezier_points([(x.x, x.y) for x in control_points])
-    pg.draw.lines(screen, color, False, b_points, width=width)
+    PG.draw.lines(screen, color, False, b_points, width=width)
 
 def compute_bezier_points(vertices, numPoints=None):
     if numPoints is None:
