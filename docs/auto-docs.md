@@ -148,37 +148,172 @@ This is a fix/workaround for this
 
 # ./pig_ui/ui/ui_menu.py
 
+## UIMenuBar
+A graphical element at the top-left of the screen that provides a collection of commands and options for the application.
+
+Basically a set of DropDown-Elements
+
+> [!ATTENTION]
+> You should not use multiple of this!
+
 ## set_subs
+Sets the sub-elements of the UIMenu
+subs:
+* **title**: the title of the element(Is the title of a DropDown).
+* **ltext**: a list of titles for the sub-elements of the DropDown.
+* **lcom**: a list of callbacks for the sub-elements.(None will set each to lambda)
+
 Format:
-    {
-        'title': "title",
-        'ltext': [],
-        'lcom': []
-    }
+```json
+{
+    'title': "title",
+    'ltext': [],
+    'lcom': []
+}
+```
 
 # ./pig_ui/ui/ui_sidebar.py
 
+## UISideBar
+The SideBar is used for e.g.:
+* Settings
+* Menus
+
+Only LeftBound!
+
+## roll_in
+Closes the sidebar.
+
+## roll_out
+Opens the sidebar.
+
 # ./pig_ui/ui/ui_spinbox.py
+
+## UISpinBox
+A SpinBox, simply a TextInput with two Buttons, one for incrementing the current number & the other for decrementing it. 
+
+## get_n
+Get the `self.inp.text` if int | float compatible
+Otherwise returns 0
+
+## inc_num
+Calling this function will increment the number stored in `self.inp`
+
+## dec_num
+Calling this function will decrement the number stored in `self.inp`
 
 # ./pig_ui/ui/ui_textinput.py
 
 ## SpecialKeyStates
 These States determine in Special how to manage the key
 
+## SpecialKey
+A Workaround for keypresses in pygame.
+
+Supports repeating keys
+
 ## UITextInput
-A Default TextInput
+A TextInput.
+
+The user can write something into it.
+
+* **type**: Should be (1=int,2=float,3=hex-color,other=no-check)
+* **multiline**: enables/disables multiple lines
+* **max_length**: sets the max length for the `self.text` var.
+
+Has some flaws:
+* out of bounds write
 
 ## type_check
         
 
 # ./pig_ui/ui/ux_element.py
 
-## UXParameterError
+## UX4Param
+A Parameter Object used to determine rect-boundings
 
+*options -> must be 4 Parameters
+
+## UXElement
+A UXElement is used to style the UI
+
+## UXRect
+A Rectangle Object, will be rendered by calling draw.
+
+Uses the same options as pygame.draw.rect
+
+## UXCircle
+A Circle Object, will be rendered by calling draw.
+
+Uses the same options as pygame.draw.circle
+
+## UXLine
+A Line Object, will be rendered by calling draw.
+
+Uses the same options as pygame.draw.line
+
+## UXPolygon
+A Polygon Object, will be rendered by calling draw.
+
+Uses the same options as pygame.draw.polygon
+
+## UXImage
+A Image Object, this is different to the other UX.
+
+* **path**: Can be a string or Surface.(If string loads the image from the path else takes the image)
+
+## UXText
+A Text Object.
+Uses pygame.font to draw text
+
+* **anchor**: Should be (0=left,1=center,2=right)
+* **color**: Must be a color-like & pygame-compatible
+* **text_get_callback**: Can be str or a function(Used to change text on the fly, if necessary)
+
+Missing / Future:
+Add a snap point for x & y, so the text will not go outside the element!
+
+## UXWrapper
+Wraps up the UX for UI Usage.
+
+## draw
+Draws the object based on the options
+
+## draw
+Draws a rectangle based on the options
+
+## draw
+Draws a circle based on the options
+
+## draw
+Draws a line based on the options
+
+## draw
+Draws a polygon based on the options
+
+## update
+Updates the image, should be the same resolution as before!
+
+## draw
+Draws the object based on the options
+
+## anchor_offset
+Returns the anchor offset based on `self.anchor`
+Can be:
+* 0: left
+* 0.5: center
+* 1: right
+
+## draw
+Renders the text(extremly inefficient) & draws it based on the options to the screen.
+
+## draw
+Draws the UX for the selected mode
 
 ## set_mode
-(0) normal
-(1) hover
-(2) click
-(3) disabled
+sets the mode, usually called by the UIElement.
+*0: normal
+*1: hover
+*2: click
+*3: disabled(unused currently)
 
