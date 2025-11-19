@@ -1,4 +1,4 @@
-__version__ = "0.1.29"
+__version__ = "0.1.30"
 from pig_ui.ui.ux_element import (
     UXWrapper, 
     UXText, 
@@ -16,3 +16,4 @@ from pig_ui.ui.ui_sidebar import UISideBar
 from pig_ui.ui.constants import Anchors
 
 from pig_ui.ui.ui_manager import UIM
+from pig_ui.app import App
