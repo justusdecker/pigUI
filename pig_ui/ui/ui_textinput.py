@@ -46,10 +46,6 @@ class UITextInput(UIElement):
     """
     A Default TextInput
     """
-    TRANSLATION_TABLE = {getattr(pg,f'K_{l}'): (l, u) for l,u in zip('0123456789abcdefghijklmnopqrstuvwxyz','=!"§$%&/()ABCDEFGHIJKLMNOPQRSTUVWXYZ')}
-    TRANSLATION_TABLE[pg.K_SPACE] = (' ', ' ')
-    TRANSLATION_TABLE[pg.K_RETURN] = ('', '\n')
-    TRANSLATION_TABLE[pg.K_PERIOD] = ('.', ':')
     def __init__(self, app, pos, size, ux = None, draggable = False, multiline: bool = False, max_length: int = -1, type: int = 2, **kwargs):
         """
         Type 0: takes all(str)
@@ -95,8 +91,8 @@ class UITextInput(UIElement):
         self.type = type
         self.special_keys: dict[str, SpecialKey] = {}
         
-        self.set_special_key_state(pg.K_RETURN)
-        self.set_special_key_state(pg.K_BACKSPACE)
+        self.set_special_key_state(PG.K_RETURN)
+        self.set_special_key_state(PG.K_BACKSPACE)
         
     def get_text(self) -> str:
         return self.text
@@ -104,13 +100,13 @@ class UITextInput(UIElement):
         self.is_editing = True
     @property
     def delete(self) -> bool:
-        return pg.K_BACKSPACE in self.event.KEYS
+        return PG.K_BACKSPACE in self.event.KEYS
     @property
     def _return(self) -> bool:
-        return pg.K_RETURN in self.event.KEYS
+        return PG.K_RETURN in self.event.KEYS
     @property
     def shift(self) -> bool:
-        return pg.K_LSHIFT in self.event.KEYS or pg.K_RSHIFT in self.event.KEYS
+        return PG.K_LSHIFT in self.event.KEYS or PG.K_RSHIFT in self.event.KEYS
 
     def update(self):
         return super().update()
@@ -153,10 +149,10 @@ class UITextInput(UIElement):
         self.is_editing = False
     def keyboard_interaction(self):
         if not self.is_editing: return
-        self.update_special_key_state(pg.K_RETURN)
-        self.update_special_key_state(pg.K_BACKSPACE)
+        self.update_special_key_state(PG.K_RETURN)
+        self.update_special_key_state(PG.K_BACKSPACE)
         
-        if self.get_special_key_state(pg.K_BACKSPACE):
+        if self.get_special_key_state(PG.K_BACKSPACE):
             self.text = self.text[:-1] if self.text else ''
             return
         
@@ -166,5 +162,5 @@ class UITextInput(UIElement):
         text = self.type_check(text)
         if text:
             self.text += text
-        if self.multiline and self.get_special_key_state(pg.K_RETURN):
+        if self.multiline and self.get_special_key_state(PG.K_RETURN):
             self.text += '\n'
