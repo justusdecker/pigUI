@@ -3,6 +3,9 @@ from pig_ui.ui.ui_textinput import UITextInput
 from pig_ui.ui.ux_element import UXWrapper, UXText, UXRect
 from pig_ui.constants import *
 class UISpinBox(UIElement): 
+    """
+    A SpinBox, simply a TextInput with two Buttons, one for incrementing the current number & the other for decrementing it. 
+    """
     def __init__(self, app, pos,increment_by: float | int,round_by: int, **kwargs):
         kwargs['anchor'] = 'tl'
         self.increment_by = increment_by
@@ -48,19 +51,31 @@ class UISpinBox(UIElement):
             parent = self,
             cb_lclick = self.inc_num
         )
+        
     def get_n(self) -> float | int:
+        """
+        Get the `self.inp.text` if int | float compatible
+        Otherwise returns 0
+        """
         try:
             n = float(self.inp.text)
             return n
         except:
             return 0
+        
     def inc_num(self, x):
+        """
+        Calling this function will increment the number stored in `self.inp`
+        """
         n = self.get_n()
         n += self.increment_by
         n = round(n, self.round_by)
         self.inp.text = str(n)
     
     def dec_num(self, x):
+        """
+        Calling this function will decrement the number stored in `self.inp`
+        """
         n = self.get_n()
         n -= self.increment_by
         n = round(n, self.round_by)
