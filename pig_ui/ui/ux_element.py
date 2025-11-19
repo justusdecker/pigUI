@@ -1,23 +1,29 @@
 from pig_ui.constants import *
 
-class UXParameterError(Exception):
-    """"""
-
 class UX4Param:
+    """
+    A Parameter Object used to determine rect-boundings
+    
+    *options -> must be 4 Parameters
+    """
     def __init__(self,*options):
-        options = list(options)
-        l = 4 - len(options)
-        if l < 0:
-            raise Exception('TooManyParameters')
-        if l > 0:
-            options += [0 for i in range(l)]
-        
         self.options = options
 
 class UXElement:
-    def draw(self): ...
+    """
+    A UXElement is used to style the UI
+    """
+    def draw(self):
+        """
+        Draws the object based on the options
+        """
 
 class UXRect(UXElement):
+    """
+    A Rectangle Object, will be rendered by calling draw.
+    
+    Uses the same options as pygame.draw.rect
+    """
     def __init__(self,
                  border_radius: int | UX4Param = -1,
                  color: Color = Color('#252525'),
@@ -33,6 +39,9 @@ class UXRect(UXElement):
         self.width = width
         
     def draw(self, surf: Surface, offset: Vector2):
+        """
+        Draws a rectangle based on the options
+        """
         PG.draw.rect(surf, 
                      self.color, 
                      (offset.x + self.pos.x,offset.y + self.pos.y, self.size.x,self.size.y),
@@ -42,6 +51,11 @@ class UXRect(UXElement):
                      )
 
 class UXCircle(UXElement): 
+    """
+    A Circle Object, will be rendered by calling draw.
+    
+    Uses the same options as pygame.draw.circle
+    """
     def __init__(self,
                  color: Color,
                  center: Vector2,
@@ -55,6 +69,9 @@ class UXCircle(UXElement):
         self.drawing_points = drawing_points
         
     def draw(self, surf):
+        """
+        Draws a circle based on the options
+        """
         PG.draw.circle(
             surf,
             self.color,
@@ -65,6 +82,11 @@ class UXCircle(UXElement):
         )
 
 class UXLine(UXElement):
+    """
+    A Line Object, will be rendered by calling draw.
+    
+    Uses the same options as pygame.draw.line
+    """
     def __init__(self,
                  color: Color,
                  start: Vector2,
@@ -74,7 +96,11 @@ class UXLine(UXElement):
         self.start = start
         self.end = end
         self.width = width
+        
     def draw(self, surf):
+        """
+        Draws a line based on the options
+        """
         PG.draw.line(
             surf,
             self.color,
@@ -84,6 +110,11 @@ class UXLine(UXElement):
         )
 
 class UXPolygon(UXElement):
+    """
+    A Polygon Object, will be rendered by calling draw.
+    
+    Uses the same options as pygame.draw.polygon
+    """
     def __init__(self,
                  color: Color,
                  points: list[Vector2],
@@ -92,6 +123,9 @@ class UXPolygon(UXElement):
         self.points = points
         self.width = width
     def draw(self, surf):
+        """
+        Draws a polygon based on the options
+        """
         PG.draw.polygon(
             surf,
             self.color,
@@ -100,6 +134,11 @@ class UXPolygon(UXElement):
         )
 
 class UXImage(UXElement):
+    """
+    A Image Object, this is different to the other UX.
+    
+    * **path**: Can be a string or Surface.(If string loads the image from the path else takes the image)
+    """
     def __init__(self,
                  pos: Vector2,
                  path: str | Surface,
@@ -111,23 +150,53 @@ class UXImage(UXElement):
             self.image = path
             
         self.alpha = alpha
+        
     def update(self, surf: Surface):
+        """
+        Updates the image, should be the same resolution as before!
+        """
         self.image = surf
+        
     def draw(self, surf, offset):
+        """
+        Draws the object based on the options
+        """
         surf.blit(self.image, self.pos+offset)
 
 class UXText(UXElement):
-    # + Add a snap point for x, so the text will not go outside the element!
+    """
+    A Text Object.
+    Uses pygame.font to draw text
+    
+    * **anchor**: Should be (0=left,1=center,2=right)
+    * **color**: Must be a color-like & pygame-compatible
+    * **text_get_callback**: Can be str or a function(Used to change text on the fly, if necessary)
+    
+    Missing / Future:
+    Add a snap point for x & y, so the text will not go outside the element!
+    """
     def __init__(self, pos: Vector2 = Vector2(0,0), color: Color = Color('#dddddd'), anchor = 0,text_get_callback: Callable | str = lambda: ""):
         self.anchor = anchor
         self.pos = pos
         self.text_get_callback = text_get_callback
         self.color = color
         super().__init__()
+        
     @property
     def anchor_offset(self) -> Vector2:
+        """
+        Returns the anchor offset based on `self.anchor`
+        Can be:
+        * 0: left
+        * 0.5: center
+        * 1: right
+        """
         return [0,0.5,1][self.anchor]
+    
     def draw(self, surf: Surface, offset: Vector2):
+        """
+        Renders the text(extremly inefficient) & draws it based on the options to the screen.
+        """
         text = self.text_get_callback() if not isinstance(self.text_get_callback, str) else self.text_get_callback
         rendered = NORM_FONT.render(text, True, self.color)
         size = Vector2(*rendered.get_size())
@@ -149,35 +218,30 @@ UIELEMENT_TEXT = [
     [UXText(color=Color('#ffffff'))],
     [UXText(color=Color('#000000'))]
 ]
-
-class UXRenderer:
-    def __init__(self,
-                 ui,
-                 ux: list[list[UXElement]]):
-        self.ui = ui
-        self.ux = ux
-        self.draw()
-    def draw(self, surf: Surface, offset: Vector2):
-        for element in self.ux:
-            
-            element.draw(surf, offset)
             
 class UXWrapper:
-    def __init__(self, ux: list[list[UXRenderer]]):
+    """
+    Wraps up the UX for UI Usage.
+    """
+    def __init__(self, ux: list[list[UXElement]]):
         
         self.ux = ux
         self.set_mode(0)
     
     def draw(self,surf: Surface, offset: Vector2):
+        """
+        Draws the UX for the selected mode
+        """
         for ux in self.ux[self.selected]:
             ux.draw(surf, offset)
         
     def set_mode(self,type: int):
         """
-        (0) normal
-        (1) hover
-        (2) click
-        (3) disabled
+        sets the mode, usually called by the UIElement.
+        *0: normal
+        *1: hover
+        *2: click
+        *3: disabled(unused currently)
         """
         self.selected = type
         
