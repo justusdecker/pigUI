@@ -18,4 +18,5 @@ dependencies = { file = "requirements.txt" }
 version = { attr = "pig_ui.__version__"}
 [project.urls]
 homepage = "https://github.com/justusdecker/pigUI"
-
+[tool.setuptools]
+packages = ["pig_ui"]
