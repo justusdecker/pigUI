@@ -216,7 +216,7 @@ class UIElement:
     
     def draw(self):
         self.app.window.blit(self.image,self.abs_offset)
-        pg.draw.rect(self.app.window, (255,0,0), (self.abs_offset.x, self.abs_offset.y, self.size.x, self.size.y))
+        PG.draw.rect(self.app.window, (255,0,0), (self.abs_offset.x, self.abs_offset.y, self.size.x, self.size.y))
 
         if not self.blocked and UIM.blocked == -1:
             self.ux.set_mode(0)
