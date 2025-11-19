@@ -3,6 +3,9 @@ from pig_ui.ui.ux_element import UXWrapper, UXText, UXRect
 from pig_ui.ui.ui_element import UIElement
 
 class SpecialKeyStates:
+    """
+    These States determine in Special how to manage the key
+    """
     IDLE = 0
     WAITING_FOR_DELAY = 1
     REPEATING = 2
