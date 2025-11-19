@@ -17,6 +17,9 @@ SET_BUTTON = [
 
 
 def convert_hsv_to_rgb(H: float, S: float, V: float) -> tuple[int, int, int]:
+    """
+    Converts HSV to RGB
+    """
     if S == 0.0:
         val = int(V * 255)
         return (val, val, val)
@@ -36,17 +39,32 @@ def convert_hsv_to_rgb(H: float, S: float, V: float) -> tuple[int, int, int]:
     
     return (int(r * 255), int(g * 255), int(b * 255))
 
-def color_rect_array(hue: float, size: int = 256) -> NDArray: #! Optimize by doing only pixels needed, not all & convert
+def color_rect_array(hue: float, size: int = 256) -> NDArray:
+    """
+    Gives a pixel_array of a color_palette based of the hue, used for the colorpicker
+    
+    This is not optimized:
+        - only drawing pixels needed, not all & convert
+    """
     pixel_array = zeros(shape=(256,256,3),dtype=uint8)
     for x in range(256):
         for y in range(256):
             pixel_array[y, x] = convert_hsv_to_rgb(hue,x / 255,(255 - y) / 255)
     return pixel_array
 
-def color_rect(hue: float, size: int = 256) -> Surface: #! Optimize by doing only pixels needed, not all & convert
+def color_rect(hue: float, size: int = 256) -> Surface:
+    """
+    Gives a Surface of a color_palette based of the hue, used for the colorpicker
+    """
     return PG.transform.scale(make_surface(color_rect_array(hue, size)),(size, size))
 
-def color_line(size: Vector2 = Vector2(256, 16)) -> Surface: #! Optimize by doing only pixels needed, not all & convert
+def color_line(size: Vector2 = Vector2(256, 16)) -> Surface:
+    """
+    Gives a pixel_array of a color_line for selecting the hue of the color_rect, used for the colorpicker
+    
+    This is not optimized:
+        - only drawing pixels needed, not all & convert
+    """
     pixel_array = zeros(shape=(256,16,3))
     for x in range(256):
         for y in range(16):
