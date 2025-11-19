@@ -44,14 +44,14 @@ def color_rect_array(hue: float, size: int = 256) -> NDArray: #! Optimize by doi
     return pixel_array
 
 def color_rect(hue: float, size: int = 256) -> Surface: #! Optimize by doing only pixels needed, not all & convert
-    return pg.transform.scale(make_surface(color_rect_array(hue, size)),(size, size))
+    return PG.transform.scale(make_surface(color_rect_array(hue, size)),(size, size))
 
 def color_line(size: Vector2 = Vector2(256, 16)) -> Surface: #! Optimize by doing only pixels needed, not all & convert
     pixel_array = zeros(shape=(256,16,3))
     for x in range(256):
         for y in range(16):
             pixel_array[x, y] = convert_hsv_to_rgb(x/255,1.0,1.0)
-    return pg.transform.scale(make_surface(pixel_array),size)
+    return PG.transform.scale(make_surface(pixel_array),size)
 
 class UIColorPickerRect(UIElement):
     def __init__(self, app, pos, size, ux = None, draggable = False, **kwargs):
@@ -60,7 +60,7 @@ class UIColorPickerRect(UIElement):
     
     def draw(self):
         super().draw()
-        pg.draw.circle(
+        PG.draw.circle(
                 self.app.window,
                 (self.parent.color.b, self.parent.color.g, self.parent.color.r),
                 self.abs_offset + self.parent.color_pos,
@@ -75,7 +75,7 @@ class UIColorPickerLine(UIElement):
     def draw(self):
         super().draw()
         col = Color(self.parent.ux_color_line.image.get_at(Vector2(self.parent.hue_pos,0)))
-        pg.draw.line(
+        PG.draw.line(
                 self.app.window,
                 (col.b, col.g, col.r),
                 self.abs_offset + Vector2(self.parent.hue_pos,-4),
@@ -91,7 +91,7 @@ class UIColorInput(UITextInput):
         super().__init__(app, pos, size, ux, draggable, multiline, max_length, type, **kwargs)
     
     def update(self):
-        if self.special_keys[pg.K_RETURN].pressed:
+        if self.special_keys[PG.K_RETURN].pressed:
             try:
                 # 1. HEX zu RGB konvertieren (0-255)
                 r, g, b = hex_to_rgb(self.text)
