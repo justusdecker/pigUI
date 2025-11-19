@@ -33,7 +33,6 @@ class UIElement:
     
     ## Params
     #### app
-    :key key1:
     The UI Element needs this to:
     - blit to the window
     - retreive events
@@ -53,9 +52,13 @@ class UIElement:
     
     `ux` is used for styling the UIElement, for more info: look into the UXElement Docs.
     
-    #### kwargs
+    ### kwargs
+    
+    #### group
+    A Group is used to update / draw only a specific    
+    
     event
-    group
+    
     layer
     o_layer
     visible
