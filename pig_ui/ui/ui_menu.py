@@ -4,6 +4,14 @@ from pig_ui.constants import *
 from pig_ui.ui.ux_element import UXWrapper, UXText, UXRect
 from pig_ui.ui.ui_manager import UIM
 class UIMenuBar(UIElement):
+    """
+    A graphical element at the top-left of the screen that provides a collection of commands and options for the application.
+    
+    Basically a set of DropDown-Elements
+    
+    > [!ATTENTION]
+    > You should not use multiple of this!
+    """
     def __init__(self, app, pos, size, ux = None, draggable = False, **kwargs):
         kwargs['visible'] = False
         kwargs['anchor'] = 'tl'
@@ -11,12 +19,20 @@ class UIMenuBar(UIElement):
         self.sub = []
     def set_subs(self, subs: list[dict]):
         """
+        Sets the sub-elements of the UIMenu
+        subs:
+        * **title**: the title of the element(Is the title of a DropDown).
+        * **ltext**: a list of titles for the sub-elements of the DropDown.
+        * **lcom**: a list of callbacks for the sub-elements.(None will set each to lambda)
+        
         Format:
-            {
-                'title': "title",
-                'ltext': [],
-                'lcom': []
-            }
+        ```json
+        {
+            'title': "title",
+            'ltext': [],
+            'lcom': []
+        }
+        ```
         """
         
         for i, dd in enumerate(subs):
@@ -27,7 +43,7 @@ class UIMenuBar(UIElement):
                 parent=self,
                 anchor= 'tl',
                 title = dd['title'],
-                draggable=True,
+                draggable=False,
                 )
             
             uidd.set_subs(dd['ltext'], dd['lcom'])
