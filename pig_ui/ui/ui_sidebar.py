@@ -4,6 +4,13 @@ from pig_ui.ui.ux_element import UXWrapper, UXText, UXRect
 from pig_ui.constants import *
 
 class UISideBar(UIElement):
+    """
+    The SideBar is used for e.g.:
+    * Settings
+    * Menus
+    
+    Only LeftBound!
+    """
     def __init__(self, app):
         size = Vector2(SCREEN_WIDTH // 4, SCREEN_HEIGHT)
         
@@ -51,11 +58,17 @@ class UISideBar(UIElement):
         )
         
     def roll_in(self, x):
+        """
+        Closes the sidebar.
+        """
         self.visible = False
         self.in_btn.visible = False
         self.out_btn.visible = True
         
     def roll_out(self, x):
+        """
+        Opens the sidebar.
+        """
         self.visible = True
         self.in_btn.visible = True
         self.out_btn.visible = False
