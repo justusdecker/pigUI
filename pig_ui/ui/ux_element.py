@@ -33,7 +33,7 @@ class UXRect(UXElement):
         self.width = width
         
     def draw(self, surf: Surface, offset: Vector2):
-        pg.draw.rect(surf, 
+        PG.draw.rect(surf, 
                      self.color, 
                      (offset.x + self.pos.x,offset.y + self.pos.y, self.size.x,self.size.y),
                      self.width,
@@ -55,7 +55,7 @@ class UXCircle(UXElement):
         self.drawing_points = drawing_points
         
     def draw(self, surf):
-        pg.draw.circle(
+        PG.draw.circle(
             surf,
             self.color,
             self.center,
@@ -75,7 +75,7 @@ class UXLine(UXElement):
         self.end = end
         self.width = width
     def draw(self, surf):
-        pg.draw.line(
+        PG.draw.line(
             surf,
             self.color,
             self.start,
@@ -92,7 +92,7 @@ class UXPolygon(UXElement):
         self.points = points
         self.width = width
     def draw(self, surf):
-        pg.draw.polygon(
+        PG.draw.polygon(
             surf,
             self.color,
             self.points,
@@ -106,7 +106,7 @@ class UXImage(UXElement):
                  alpha: bool):
         self.pos = pos
         if isinstance(path, str):
-            self.image = pg.image.load(path)
+            self.image = PG.image.load(path)
         elif isinstance(path, Surface):
             self.image = path
             
@@ -115,8 +115,6 @@ class UXImage(UXElement):
         self.image = surf
     def draw(self, surf, offset):
         surf.blit(self.image, self.pos+offset)
-
-FONT = pg.font.SysFont('Consolas',13)
 
 class UXText(UXElement):
     # + Add a snap point for x, so the text will not go outside the element!
@@ -131,7 +129,7 @@ class UXText(UXElement):
         return [0,0.5,1][self.anchor]
     def draw(self, surf: Surface, offset: Vector2):
         text = self.text_get_callback() if not isinstance(self.text_get_callback, str) else self.text_get_callback
-        rendered = FONT.render(text, True, self.color)
+        rendered = NORM_FONT.render(text, True, self.color)
         size = Vector2(*rendered.get_size())
         surf.blit(rendered, self.pos + offset - (size * self.anchor_offset))
         
