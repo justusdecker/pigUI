@@ -8,7 +8,7 @@ class Events:
         self.MOUSE_4 = False
         self.MOUSE_5 = False
         self.QUIT = False
-        self.MOUSE_POS = pg.mouse.get_pos()
+        self.MOUSE_POS = PG.mouse.get_pos()
         self.KEYDOWN = False
         self.KEYS = set()
         self.DOUBLE_CLICK = False
@@ -16,9 +16,9 @@ class Events:
         self.TEXTINPUT = ''
         self.last_click = 0
         self.keys_to_control = [
-            pg.K_a, # Add a new Node
-            pg.K_s, # Saves the configuration
-            pg.K_l, # Loads the configuration
+            PG.K_a, # Add a new Node
+            PG.K_s, # Saves the configuration
+            PG.K_l, # Loads the configuration
         ]
         
     def __set_mouse_btn(self, event_btn: int, i: bool):
@@ -32,26 +32,26 @@ class Events:
     def recv_events(self) -> None:
         self.WHEEL = 0 # Resets the Wheel, because pygame will not do this
         self.DOUBLE_CLICK = False
-        self.MOUSE_POS = pg.mouse.get_pos()
+        self.MOUSE_POS = PG.mouse.get_pos()
         self.TEXTINPUT = ''
-        for event in pg.event.get():
+        for event in PG.event.get():
             match event.type:
-                case pg.MOUSEBUTTONDOWN | pg.MOUSEBUTTONUP:
-                    i = event.type == pg.MOUSEBUTTONDOWN
+                case PG.MOUSEBUTTONDOWN | PG.MOUSEBUTTONUP:
+                    i = event.type == PG.MOUSEBUTTONDOWN
                     self.__set_mouse_btn(event.button,i)
                     if time() - self.last_click <= 0.5 and i: # using the windows-default double-click speed
                         self.DOUBLE_CLICK = True
                         self.last_click = 0
                     if event.button == 1 and i:
                         self.last_click = time()
-                case pg.MOUSEWHEEL:
+                case PG.MOUSEWHEEL:
                     self.WHEEL = event.y
-                case pg.KEYDOWN:
+                case PG.KEYDOWN:
                     self.KEYS.add(event.key)
-                case pg.KEYUP:
+                case PG.KEYUP:
                     self.KEYS.remove(event.key)
-                case pg.TEXTINPUT:
+                case PG.TEXTINPUT:
                     self.TEXTINPUT = event.text
-                case pg.QUIT:
+                case PG.QUIT:
                     self.QUIT = True
        
