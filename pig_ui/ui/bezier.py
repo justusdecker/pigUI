@@ -1,11 +1,17 @@
 from pig_ui.constants import *
 
 def draw_beziere(screen, control_points, numPoints = None,color=Color('#ffffff'), width=1):
+    """
+    Draws a smooth cubic Bézier curve onto the specified screen surface.
+    """
     control_points = [Vector2(f,g) for f,g in control_points]
     b_points = compute_bezier_points([(x.x, x.y) for x in control_points])
     PG.draw.lines(screen, color, False, b_points, width=width)
 
 def compute_bezier_points(vertices, numPoints=None):
+    """
+    Computes a set of discrete points along a cubic Bézier curve.
+    """
     if numPoints is None:
         numPoints = 30
     if numPoints <= 2 or len(vertices) != 4:
