@@ -1,4 +1,4 @@
-__version__ = "0.1.30"
+__version__ = "0.1.31"
 from pig_ui.ui.ux_element import (
     UXWrapper, 
     UXText, 
@@ -17,3 +17,5 @@ from pig_ui.ui.constants import Anchors
 
 from pig_ui.ui.ui_manager import UIM
 from pig_ui.app import App
+
+from pig_ui.ui.bezier import draw_beziere, compute_bezier_points
