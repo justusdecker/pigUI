@@ -21,12 +21,16 @@ pigUI is a modular, event-driven framework built on **Pygame** designed for crea
 
 You need **Python 3.x** installed.
 
-### Dependencies
+### Install
 
 PyNodle requires **Pygame** and **NumPy** (used for array manipulation in the color picker and potentially other areas).
 
 ```bash
 pip install -r requirements.txt
+```
+#### The package
+```bash
+pip install jmpUI
 ```
 
 ## 🚀 Usage and Extending
