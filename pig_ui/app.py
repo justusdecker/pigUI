@@ -3,13 +3,13 @@ from pig_ui.events import Events
 from pig_ui.ui.ui_element import UIM
 
 class App:
-    def __init__(self):
+    def __init__(self, title: str = 'pigUI'):
         self.is_running = True
         self.window = PG.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        PG.display.set_caption("PyNodle")
+        PG.display.set_caption(title)
         self.clock = PG.time.Clock()
         self.events = Events()
-        
+
     def run(self):
         while self.is_running:
             self.window.fill((25,25,25))
