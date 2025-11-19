@@ -11,6 +11,11 @@ class SpecialKeyStates:
     REPEATING = 2
     
 class SpecialKey:
+    """
+    A Workaround for keypresses in pygame.
+    
+    Supports repeating keys
+    """
     DELAY = 0
     REPEAT = 0
     def __init__(self, delay_ms: int, repeat_ms: int):
@@ -44,31 +49,21 @@ class SpecialKey:
                 self.last_repeat_time = time()
 
 class UITextInput(UIElement):
-    #! Add blocking: out of bounds write
-    #! Add Row/Columns
+
     """
-    A Default TextInput
+    A TextInput.
+    
+    The user can write something into it.
+    
+    * **type**: Should be (1=int,2=float,3=hex-color,other=no-check)
+    * **multiline**: enables/disables multiple lines
+    * **max_length**: sets the max length for the `self.text` var.
+    
+    Has some flaws:
+    * out of bounds write
     """
     def __init__(self, app, pos, size, ux = None, draggable = False, multiline: bool = False, max_length: int = -1, type: int = 2, **kwargs):
-        """
-        Type 0: takes all(str)
-        Type 1: takes only(int)
-        Type 2: takes int & float
-        """
-        # click outside or returning will set is_editing to false
-        """
-        To reset the is_editing variable we need to inject this into UIM
-        from there it will check the id & outside_clicks so it can reset
-        
-        in UIM:
-            if self.is_editing: break # will break because the other elements should be not interacted with!
-            if object.is_editing:
-                if not object.hover and object.event.MOUSE_LEFT:
-                    object.is_editing = False
-        """
-        
-        # We need UXFont
-        # The font can have its own anchors left, center, right
+
         kwargs['cb_lclick'] = self.set_edit
         kwargs['cb_unclick'] = self.reset
         if ux is None:
