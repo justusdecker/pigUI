@@ -8,9 +8,9 @@
 |[draw](../pig_ui/app.py)|function|🟢|
 |[event_handler](../pig_ui/app.py)|function|🟢|
 |[destroy](../pig_ui/app.py)|function|🟡|
-|[Events](../pig_ui/events.py)|class|🔴|
-|[__set_mouse_btn](../pig_ui/events.py)|function|🔴|
-|[recv_events](../pig_ui/events.py)|function|🔴|
+|[Events](../pig_ui/events.py)|class|🟢|
+|[__set_mouse_btn](../pig_ui/events.py)|function|🟡|
+|[recv_events](../pig_ui/events.py)|function|🟢|
 |[Color](../pig_ui/modules.py)|function|🔴|
 |[Rect](../pig_ui/modules.py)|function|🔴|
 |[Vector2](../pig_ui/modules.py)|function|🔴|
