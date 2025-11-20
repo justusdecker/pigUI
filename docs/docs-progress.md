@@ -82,8 +82,8 @@
 |[SpecialKeyStates](../pig_ui/ui/ui_textinput.py)|class|🟢|
 |[SpecialKey](../pig_ui/ui/ui_textinput.py)|class|🟢|
 |[UITextInput](../pig_ui/ui/ui_textinput.py)|class|🟢|
-|[reset](../pig_ui/ui/ui_textinput.py)|function|🔴|
-|[update](../pig_ui/ui/ui_textinput.py)|function|🔴|
+|[reset](../pig_ui/ui/ui_textinput.py)|function|🟡|
+|[update](../pig_ui/ui/ui_textinput.py)|function|🟢|
 |[get_text](../pig_ui/ui/ui_textinput.py)|function|🟢|
 |[set_edit](../pig_ui/ui/ui_textinput.py)|function|🟡|
 |[delete](../pig_ui/ui/ui_textinput.py)|function|🟢|
