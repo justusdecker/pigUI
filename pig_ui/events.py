@@ -1,5 +1,24 @@
 from pig_ui.constants import *
 class Events:
+    """
+    A Custom Pygame Event Wrapper
+    ***
+    The Events you can use:
+    |name|type|description|
+    |---|---|---|
+    |WHEEL|int|Can be -1, 0 & 1|
+    |MOUSE_LEFT|bool|-|
+    |MOUSE_RIGHT|bool|-|
+    |MOUSE_MIDDLE|bool|-|
+    |MOUSE_4|bool|-|
+    |MOUSE_5|bool|-|
+    |QUIT|bool|alias: pygame.QUIT|
+    |MOUSE_POS|tuple[int, int]|(x, y)|
+    |KEYS|list[int]|[pygame.K_a...]|
+    |KEYDOWN|bool|unused|
+    |DOUBLE_CLICK|bool|-|
+    |TEXTINPUT|str|-|
+    """
     def __init__(self):
         self.WHEEL = False
         self.MOUSE_LEFT = False
@@ -12,7 +31,6 @@ class Events:
         self.KEYDOWN = False
         self.KEYS = set()
         self.DOUBLE_CLICK = False
-        self.RETURN = False
         self.TEXTINPUT = ''
         self.last_click = 0
         self.keys_to_control = [
@@ -22,6 +40,9 @@ class Events:
         ]
         
     def __set_mouse_btn(self, event_btn: int, i: bool):
+        """
+        Sets the event->mouse-button
+        """
         match event_btn:
             case 1: self.MOUSE_LEFT = i
             case 2: self.MOUSE_MIDDLE = i
@@ -30,6 +51,10 @@ class Events:
             case 5: self.MOUSE_5 = i
             
     def recv_events(self) -> None:
+        """
+        Process all events.
+        More info in the Events.docstring
+        """
         self.WHEEL = 0 # Resets the Wheel, because pygame will not do this
         self.DOUBLE_CLICK = False
         self.MOUSE_POS = PG.mouse.get_pos()
