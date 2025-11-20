@@ -4,6 +4,12 @@ from pig_ui.ui.ui_manager import UIM
 from pig_ui.events import Events
 
 class UIGroup:
+    """
+    Used for group-wise ignoring in the UIM.
+    
+    Takes one argument:
+    * **group_name**: By using this in the UIM.update, you can prevent elements in this group from update / draw
+    """
     gid = 0
     def __init__(self, group_name: str):
         self.group_name = group_name
@@ -74,9 +80,6 @@ class UIElement:
     
     """
     #! Fix click in non hover state -> sliding into uie will count as click
-    """
-    The Base Class for UIElements
-    """
     __uid = 0
     def __init__(self,
                  app,
@@ -129,6 +132,9 @@ class UIElement:
     
     @property
     def hover(self) -> bool:
+        """
+        Is the mouse over this element
+        """
         x, y = self.abs_offset
         w,h = self.size.x,self.size.y
         g,l = self.event.MOUSE_POS
@@ -177,8 +183,6 @@ class UIElement:
     def root_parent(self) -> None | UIElement:
         """
         Gets the main / root parent of this object.
-        Can only be None if the first upper parent is None.
-        
         """
         
         parent = self.parent
@@ -191,10 +195,20 @@ class UIElement:
     
     @property
     def get_internal_mouse_pos(self) -> Vector2:
+        """
+        Usecase e.g.: colorpicker
+        """
         return self.event.MOUSE_POS - self.abs_offset
     
     def mouse_interaction(self):
-        
+        """
+        Processes:
+        - LEFT Clicks
+        - RIGHT Clicks
+        - DOUBLE Clicks
+        - KEYDOWN
+        - WHEEL Direction
+        """
         if self.event.MOUSE_LEFT and not self.hover and not self.blocked:
             self.callback_unclick(self)
         
@@ -220,6 +234,9 @@ class UIElement:
             self.callback_wheel(self)
         
     def mouse_interaction_ex(self):
+        """
+        Extended Mouse Interaction like Dragging.
+        """
         # Dragging
         if self.event.MOUSE_MIDDLE and self.is_free:
             self.is_dragging = True
@@ -228,15 +245,22 @@ class UIElement:
             self.ux.set_mode(2)
         
     def keyboard_interaction(self): # Used for Shortcuts
+        """
+        Used for TextInput.
+        """
         ...
     def keyboard_interaction_ex(self): # Used for TextInputSystems
         ...
     
     @property
     def is_free(self) -> bool:
+        """
+        free = `self.hover` and not `self.blocked`
+        """
         return self.hover and not self.blocked
     
-    def update(self): 
+    def update(self):
+
         # self.last_frame_hold to False if not pressed anymore
         # self.last_frame_hold must have a multiframe puffer preventing unwanted drags.
         # So self.last_frame_hold must be >= last_time + 0.2 and after that the self.dragging will be set to true
@@ -273,7 +297,11 @@ class UIElement:
         return self.blocked
     
     def draw(self):
-        self.app.window.blit(self.image,self.abs_offset)
+        """
+        Draws the UX to the Screen.
+        Behind the UX a debug-rect will be drawn.
+        """
+        #self.app.window.blit(self.image,self.abs_offset)
         PG.draw.rect(self.app.window, (255,0,0), (self.abs_offset.x, self.abs_offset.y, self.size.x, self.size.y))
 
         if not self.blocked and UIM.blocked == -1:
@@ -281,5 +309,8 @@ class UIElement:
         self.ux.draw(self.app.window,self.abs_offset)
         
     def destroy(self):
+        """
+        Simply destroys the Element.
+        """
         UIM.remove_from_queue(self)
         del self
