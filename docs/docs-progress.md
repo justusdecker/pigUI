@@ -2,12 +2,12 @@
 
 |file(object)|type|status|
 |---|---|---|
-|[App](../pig_ui/app.py)|class|🔴|
-|[run](../pig_ui/app.py)|function|🔴|
-|[update](../pig_ui/app.py)|function|🔴|
-|[draw](../pig_ui/app.py)|function|🔴|
-|[event_handler](../pig_ui/app.py)|function|🔴|
-|[destroy](../pig_ui/app.py)|function|🔴|
+|[App](../pig_ui/app.py)|class|🟢|
+|[run](../pig_ui/app.py)|function|🟢|
+|[update](../pig_ui/app.py)|function|🟡|
+|[draw](../pig_ui/app.py)|function|🟢|
+|[event_handler](../pig_ui/app.py)|function|🟢|
+|[destroy](../pig_ui/app.py)|function|🟡|
 |[Events](../pig_ui/events.py)|class|🔴|
 |[__set_mouse_btn](../pig_ui/events.py)|function|🔴|
 |[recv_events](../pig_ui/events.py)|function|🔴|
