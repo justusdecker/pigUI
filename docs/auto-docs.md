@@ -68,8 +68,6 @@ More info in the Events.docstring
 
 # ./pig_ui/modules.py
 
-# ./pig_ui/pygame_reps.py
-
 # ./pig_ui/__init__.py
 
 # ./pig_ui/ui/bezier.py
