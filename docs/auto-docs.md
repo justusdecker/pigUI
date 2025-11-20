@@ -40,6 +40,32 @@ Checks all events and set the `self.is_running` to false
 
 # ./pig_ui/events.py
 
+## Events
+A Custom Pygame Event Wrapper
+***
+The Events you can use:
+|name|type|description|
+|---|---|---|
+|WHEEL|int|Can be -1, 0 & 1|
+|MOUSE_LEFT|bool|-|
+|MOUSE_RIGHT|bool|-|
+|MOUSE_MIDDLE|bool|-|
+|MOUSE_4|bool|-|
+|MOUSE_5|bool|-|
+|QUIT|bool|alias: pygame.QUIT|
+|MOUSE_POS|tuple[int, int]|(x, y)|
+|KEYS|list[int]|[pygame.K_a...]|
+|KEYDOWN|bool|unused|
+|DOUBLE_CLICK|bool|-|
+|TEXTINPUT|str|-|
+
+## __set_mouse_btn
+Sets the event->mouse-button
+
+## recv_events
+Process all events.
+More info in the Events.docstring
+
 # ./pig_ui/modules.py
 
 # ./pig_ui/pygame_reps.py
