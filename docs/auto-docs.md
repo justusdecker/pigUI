@@ -282,8 +282,52 @@ The user can write something into it.
 Has some flaws:
 * out of bounds write
 
+## get_text
+Gets the text, normally called by the UXText Lambda.
+
+## set_edit
+Should only be called by Self.
+
+## delete
+Has the user pressed the BACKSPACE key?
+
+## _return
+Has the user pressed the RETURN key?
+
+## shift
+Has the user pressed the shift key?
+#! Unused
+
+## set_used_keys
+#! Unused
+
 ## type_check
-        
+Checks selected type:
+- 1: decimal
+- 2: float | int
+- 3: hex color
+- default: str
+
+Only adds text if type_check is okay
+
+## set_special_key_state
+key: int -> pygame.Key
+Creates a new instance of the SpecialKey Class and stores this in the `self.special_keys` dict.
+
+## update_special_key_state
+key: int -> pygame.Key
+Updates(if key in ev.KEYS) / Resets(else) the an instance of the SpecialKey Class.
+
+## get_special_key_state
+key: int -> pygame.Key
+Returns the `pressed` attr of an instance of the SpecialKey Class.
+
+## reset
+Disables editing, should only be called by Self
+
+## keyboard_interaction
+Updates text, special_keys etc.
+Should only be called by Self
 
 # ./pig_ui/ui/ux_element.py
 
