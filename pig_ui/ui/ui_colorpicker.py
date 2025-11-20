@@ -15,7 +15,6 @@ SET_BUTTON = [
     [UXRect(-1,Color('#000000'),size=Vector2(128,16))]
 ]
 
-
 def convert_hsv_to_rgb(H: float, S: float, V: float) -> tuple[int, int, int]:
     """
     Converts HSV to RGB
@@ -72,11 +71,17 @@ def color_line(size: Vector2 = Vector2(256, 16)) -> Surface:
     return PG.transform.scale(make_surface(pixel_array),size)
 
 class UIColorPickerRect(UIElement):
+    """
+    This is used to easy update & read the color-rect
+    """
     def __init__(self, app, pos, size, ux = None, draggable = False, **kwargs):
         
         super().__init__(app, pos, size, ux, draggable, **kwargs)
     
     def draw(self):
+        """
+        Draws the hue-line and inverts the color of the selected position, this will be the color of the circle drawn
+        """
         super().draw()
         PG.draw.circle(
                 self.app.window,
@@ -85,12 +90,19 @@ class UIColorPickerRect(UIElement):
                 15,
                 1
             )
+        
 class UIColorPickerLine(UIElement):
+    """
+    This is used to easy update & read the hue-line
+    """
     def __init__(self, app, pos, size, ux = None, draggable = False, **kwargs):
         
         super().__init__(app, pos, size, ux, draggable, **kwargs)
     
     def draw(self):
+        """
+        Draws the hue-line and inverts the color of the selected position.
+        """
         super().draw()
         col = Color(self.parent.ux_color_line.image.get_at(Vector2(self.parent.hue_pos,0)))
         PG.draw.line(
@@ -100,15 +112,26 @@ class UIColorPickerLine(UIElement):
                 self.abs_offset + Vector2(self.parent.hue_pos, 12),
                 3
             )
-def hex_to_rgb(hex_code):
+        
+def hex_to_rgb(hex_code) -> tuple[int, ...]:
+    """
+    Simply converts RGB to HEX. Removing the first character: mostly # from the string
+    """
     hex_code = hex_code[1:]
     return tuple(int(hex_code[i:i+2], 16) for i in (0, 2, 4))
+
 class UIColorInput(UITextInput):
+    """
+    Inherited from the Default TextInput.
+    """
     def __init__(self, app, pos, size, ux=None, draggable=False, multiline = False, max_length = -1, type = 2, **kwargs):
         
         super().__init__(app, pos, size, ux, draggable, multiline, max_length, type, **kwargs)
     
     def update(self):
+        """
+        Updates the parents: `color_pos`, `line_pos` & `ux_color_rect.image`
+        """
         if self.special_keys[PG.K_RETURN].pressed:
             try:
                 # 1. HEX zu RGB konvertieren (0-255)
@@ -133,6 +156,11 @@ class UIColorInput(UITextInput):
         return super().update()
 
 class UIColorPicker(UIElement):
+    """
+    A ColorPicker with `color` & `hue` selection.
+    
+    You can also input the color as hex in the TextInput.
+    """
     def __init__(self, app, pos, **kwargs):
         ux = [
             [UXRect(-1,color=Color('#363636'),size=Vector2(144,216)),
@@ -157,7 +185,7 @@ class UIColorPicker(UIElement):
             UXWrapper([[self.ux_color_rect] for i in range(4)]),
             parent = self,
             anchor='tl',
-            cb_lclick = self.get_color #CAlculate the mouse_pos - offset
+            cb_lclick = self.update_color
         )
         self.color_line_btn = UIColorPickerLine(
             self.app,
@@ -166,7 +194,7 @@ class UIColorPicker(UIElement):
             UXWrapper([[self.ux_color_line] for i in range(4)]),
             parent = self,
             anchor='tl',
-            cb_lclick = self.get_hue #CAlculate the mouse_pos - offset
+            cb_lclick = self.update_hue
         )
         
         self.color_in_out = UIColorInput(
@@ -178,21 +206,33 @@ class UIColorPicker(UIElement):
             parent = self,
             anchor = 'tl'
         )
+        
     def get_color_hex(self) -> str:
+        """
+        Gets the value of `self.color` as hex.
+        
+        e.g.: #252525 
+        """
         c = Color(self.color)
         return f'#{c.r:02x}{c.g:02x}{c.b:02x}'
         
-    def get_hue(self, obj):
+    def update_hue(self, obj):
+        """
+        Sets the hue & the corresponding color based on user-input. 
+        
+        Creates a new color_rect.
+        """
         self.hue_pos = obj.get_internal_mouse_pos.x
         self.hue = 255 / self.hue_pos
         self.ux_color_rect.image = color_rect(self.hue, 128)
         
         self.color = Color(self.ux_color_rect.image.get_at(self.color_pos))
-        c = self.color
-        self.color_in_out.text = f'#{c.r:02x}{c.g:02x}{c.b:02x}'
+        self.color_in_out.text = self.get_color_hex()
         
-    def get_color(self, obj):
+    def update_color(self, obj):
+        """
+        Sets the color based on user-input.
+        """
         self.color_pos = obj.get_internal_mouse_pos
         self.color = Color(self.ux_color_rect.image.get_at(self.color_pos))
-        c = self.color
-        self.color_in_out.text = f'#{c.r:02x}{c.g:02x}{c.b:02x}'
+        self.color_in_out.text = self.get_color_hex()
