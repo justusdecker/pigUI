@@ -2,6 +2,40 @@
 
 # ./pig_ui/app.py
 
+## App
+The Main Application that calls all necessary functions used for:
+- BackgroundCleaning
+- EventTracing
+- UIInteraction
+- Drawing
+- DisplayUpdates
+
+Contains the basic pygame loop combined with pigUI
+
+## run
+Runs:
+- BackgroundCleaning
+- EventTracing
+- UIInteraction
+- Drawing
+- DisplayUpdates
+
+## update
+Ticks the pygame Clock
+
+## draw
+updates the display & draw debug elements
+
+For the debugging state(will be added later):
+    Draws Circles for LeftClick & DoubleClicks.
+
+## event_handler
+Checks all events and set the `self.is_running` to false
+
+## destroy
+        
+        
+
 # ./pig_ui/constants.py
 
 # ./pig_ui/events.py
