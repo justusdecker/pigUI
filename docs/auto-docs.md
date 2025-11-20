@@ -100,9 +100,88 @@ Gives a pixel_array of a color_line for selecting the hue of the color_rect, use
 This is not optimized:
     - only drawing pixels needed, not all & convert
 
+## UIColorPickerRect
+This is used to easy update & read the color-rect
+
+## UIColorPickerLine
+This is used to easy update & read the hue-line
+
+## hex_to_rgb
+Simply converts RGB to HEX. Removing the first character: mostly # from the string
+
+## UIColorInput
+Inherited from the Default TextInput.
+
+## UIColorPicker
+A ColorPicker with `color` & `hue` selection.
+
+You can also input the color as hex in the TextInput.
+
+## draw
+Draws the hue-line and inverts the color of the selected position, this will be the color of the circle drawn
+
+## draw
+Draws the hue-line and inverts the color of the selected position.
+
+## update
+Updates the parents: `color_pos`, `line_pos` & `ux_color_rect.image`
+
+## get_color_hex
+Gets the value of `self.color` as hex.
+
+e.g.: #252525 
+
+## update_hue
+Sets the hue & the corresponding color based on user-input. 
+
+Creates a new color_rect.
+
+## update_color
+Sets the color based on user-input.
+
 # ./pig_ui/ui/ui_dropdown.py
 
+## UIDropDown
+A DropDown Menu.
+
+- * **title**: changes the title of the main element
+
+## text
+!Unused
+
+## toggle_dd
+Toggles the visibility of all SubElements
+
+## sub_callbacks
+Runs the corresponding callback for the dropdown subelement.
+Determined by the object
+
+## set_subs
+Set SubElements & Resets existing Subs if exist:
+Format:
+ltext:
+```json
+[
+    "abc",
+    "def",
+    ...
+]
+lcom:
+None or
+[
+    function,
+    lambda x: print(x),
+    ...
+]
+```
+
 # ./pig_ui/ui/ui_element.py
+
+## UIGroup
+Used for group-wise ignoring in the UIM.
+
+Takes one argument:
+* **group_name**: By using this in the UIM.update, you can prevent elements in this group from update / draw
 
 ## UIElement
 The Base-Class for all UIElements
@@ -163,6 +242,9 @@ uid
 ## rect
 Returns the Rect from this UI Object.
 
+## hover
+Is the mouse over this element
+
 ## image
 Returns the current Image for this UIElement.
 Will be a blank 1 by 1 Surface if nothing set!
@@ -178,7 +260,33 @@ The absolute offset: anchor + parents + pos
 
 ## root_parent
 Gets the main / root parent of this object.
-Can only be None if the first upper parent is None.
+
+## get_internal_mouse_pos
+Usecase e.g.: colorpicker
+
+## mouse_interaction
+Processes:
+- LEFT Clicks
+- RIGHT Clicks
+- DOUBLE Clicks
+- KEYDOWN
+- WHEEL Direction
+
+## mouse_interaction_ex
+Extended Mouse Interaction like Dragging.
+
+## keyboard_interaction
+Used for TextInput.
+
+## is_free
+free = `self.hover` and not `self.blocked`
+
+## draw
+Draws the UX to the Screen.
+Behind the UX a debug-rect will be drawn.
+
+## destroy
+Simply destroys the Element.
 
 # ./pig_ui/ui/ui_manager.py
 
@@ -203,6 +311,9 @@ Skip unwanted groups & not visible uie's
 We encountered a softlock after:
     Pressing a button that makes itself invisbile
 This is a fix/workaround for this
+
+## uids
+Gets the uids for all elements in the `QUEUE`
 
 # ./pig_ui/ui/ui_menu.py
 
