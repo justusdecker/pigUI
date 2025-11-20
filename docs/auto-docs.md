@@ -282,6 +282,13 @@ The user can write something into it.
 Has some flaws:
 * out of bounds write
 
+## reset
+Sets unpressed & State -> IDLE
+
+## update
+Updates the KeyState.
+Checks for repeating keys, single presses & idle
+
 ## get_text
 Gets the text, normally called by the UXText Lambda.
 
