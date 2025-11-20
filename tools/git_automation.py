@@ -17,11 +17,12 @@ def err(text: str) -> str:
     return f'\033[33m{text}\033[0m'
 def custom_rules(fp: str) -> bool:
     fp = fp.replace('\\','/')
+    print(fp)
     if fp == 'pig_ui/__init__.py':
         return '[auto] update version'
     if fp == 'docs/auto-docs.md':
         return '[auto] update docs'
-    if fp == 'docs/docs-pregress.md':
+    if fp == 'docs/docs-progress.md':
         return '[auto] update doc-progress'
 
 def main():
