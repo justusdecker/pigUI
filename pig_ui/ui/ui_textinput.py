@@ -25,10 +25,19 @@ class SpecialKey:
         self.last_repeat_time = 0.0
         self.state = SpecialKeyStates.IDLE
         self.pressed = False
+        
     def reset(self):
+        """
+        Sets unpressed & State -> IDLE
+        """
         self.state = SpecialKeyStates.IDLE
         self.pressed = False
+        
     def update(self):
+        """
+        Updates the KeyState.
+        Checks for repeating keys, single presses & idle
+        """
         self.pressed = False
         if self.state == SpecialKeyStates.IDLE: 
             self.state = SpecialKeyStates.WAITING_FOR_DELAY
@@ -93,27 +102,55 @@ class UITextInput(UIElement):
         self.set_special_key_state(PG.K_BACKSPACE)
         
     def get_text(self) -> str:
+        """
+        Gets the text, normally called by the UXText Lambda.
+        """
         return self.text
+    
     def set_edit(self,*_):
+        """
+        Should only be called by Self.
+        """
         self.is_editing = True
+        
     @property
     def delete(self) -> bool:
+        """
+        Has the user pressed the BACKSPACE key?
+        """
         return PG.K_BACKSPACE in self.event.KEYS
+    
     @property
     def _return(self) -> bool:
+        """
+        Has the user pressed the RETURN key?
+        """
         return PG.K_RETURN in self.event.KEYS
+    
     @property
     def shift(self) -> bool:
+        """
+        Has the user pressed the shift key?
+        #! Unused
+        """
         return PG.K_LSHIFT in self.event.KEYS or PG.K_RSHIFT in self.event.KEYS
-
-    def update(self):
-        return super().update()
+    
     def set_used_keys(self):
+        """
+        #! Unused
+        """
         for key in self.event.KEYS:
             self.pressed_keys.add(key)
     
     def type_check(self, text: str) -> str:
         """
+        Checks selected type:
+        - 1: decimal
+        - 2: float | int
+        - 3: hex color
+        - default: str
+        
+        Only adds text if type_check is okay
         """
         match self.type:
             case 1: 
@@ -133,19 +170,41 @@ class UITextInput(UIElement):
             case _: return text
     
     def set_special_key_state(self, key: int): 
+        """
+        key: int -> pygame.Key
+        Creates a new instance of the SpecialKey Class and stores this in the `self.special_keys` dict.
+        """
         if key not in self.special_keys:
             self.special_keys[key] = SpecialKey(500,50)
+            
     def update_special_key_state(self, key: int):
+        """
+        key: int -> pygame.Key
+        Updates(if key in ev.KEYS) / Resets(else) the an instance of the SpecialKey Class.
+        """
         if key in self.event.KEYS:
             self.special_keys[key].update()
         else:
             self.special_keys[key].reset()
 
     def get_special_key_state(self, key: int):
+        """
+        key: int -> pygame.Key
+        Returns the `pressed` attr of an instance of the SpecialKey Class.
+        """
         return self.special_keys[key].pressed
+    
     def reset(self,*_):
+        """
+        Disables editing, should only be called by Self
+        """
         self.is_editing = False
+        
     def keyboard_interaction(self):
+        """
+        Updates text, special_keys etc.
+        Should only be called by Self
+        """
         if not self.is_editing: return
         self.update_special_key_state(PG.K_RETURN)
         self.update_special_key_state(PG.K_BACKSPACE)
