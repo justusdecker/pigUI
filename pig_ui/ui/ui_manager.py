@@ -115,6 +115,9 @@ class UIManager:
             object.draw()
     @property
     def uids(self) -> list[int]:
+        """
+        Gets the uids for all elements in the `QUEUE`
+        """
         return [o.uid for o in self.QUEUE]   
 
 UIM = UIManager()
