@@ -100,7 +100,7 @@ class UIManager:
             if object.update(): # Object has been interacted with. Break out.
                 self.blocked = object.uid
             
-            self.draw(ids, groups)
+        self.draw(ids, groups) # Call the draw method only once a frame
         
     def draw(self, ids, groups):
         for id in ids:
