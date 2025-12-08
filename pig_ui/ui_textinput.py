@@ -88,7 +88,8 @@ class UITextInput(UIElement):
                 UXText(color=Color('#000000'),text_get_callback=self.get_text)]
         ]
             ux = UXWrapper(UIELEMENT_TEXT)
-        super().__init__(app, pos, size, ux, draggable, **kwargs)
+        kwargs['draggable'] = draggable
+        super().__init__(app, pos, size, ux, **kwargs)
         
         self.text = 'abc'
         self.is_editing = False
