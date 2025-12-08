@@ -1,6 +1,6 @@
 from pig_ui.constants import *
 from pig_ui.events import Events
-from pig_ui.ui.ui_element import UIM
+from pig_ui.ui_element import UIM
 
 class App:
     """
