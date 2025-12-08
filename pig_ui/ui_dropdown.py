@@ -17,7 +17,7 @@ class UIDropDown(UIElement):
                  UXText(text_get_callback=kwargs.get('title', ''))] for col in ('#484848', '#969696', '#ffffff', '#000000')
             ]
         )
-        super().__init__(app, pos, size, ux, False, **kwargs)
+        super().__init__(app, pos, size, ux, **kwargs)
         self.sub = []
 
     @property
