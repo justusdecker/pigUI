@@ -18,7 +18,7 @@ class UISideBar(UIElement):
             [UXRect(-1,Color('#242424' if i < 1 else '#484848'),size=size)] for i in range(4)
         ]
         
-        super().__init__(app, Vector2(0,0), size, UXWrapper(ux), False,anchor = 'tl')
+        super().__init__(app, Vector2(0,0), size, UXWrapper(ux), False, anchor = 'tl')
         # A SideBar are currently only leftbound
         # Two buttons are needed:
         #   * The first is the close buttom this is placed next to the bar (BarSize.x, 0)
