@@ -1,6 +1,6 @@
-from pig_ui.ui.ui_element import UIElement
-from pig_ui.ui.ui_textinput import UITextInput
-from pig_ui.ui.ux_element import UXWrapper, UXText, UXRect
+from pig_ui.ui_element import UIElement
+from pig_ui.ui_textinput import UITextInput
+from pig_ui.ux_element import UXWrapper, UXText, UXRect
 from pig_ui.constants import *
 
 class UISideBar(UIElement):
