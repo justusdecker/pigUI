@@ -1,12 +1,12 @@
-from pig_ui.ui.ui_element import UIElement
-from pig_ui.ui.ui_textinput import UITextInput
-from pig_ui.ui.ux_element import UXImage, UXWrapper
+from pig_ui.ui_element import UIElement
+from pig_ui.ui_textinput import UITextInput
+from pig_ui.ux_element import UXImage, UXWrapper
 from numpy import zeros, uint8
 from numpy.typing import NDArray
 from colorsys import rgb_to_hsv
 from pig_ui.constants import *
 from math import floor
-from pig_ui.ui.ux_element import UXRect, UXText
+from pig_ui.ux_element import UXRect, UXText
 
 SET_BUTTON = [
     [UXRect(-1,Color('#484848'),size=Vector2(128,16))],
