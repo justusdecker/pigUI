@@ -12,10 +12,10 @@ class UIMenuBar(UIElement):
     > [!ATTENTION]
     > You should not use multiple of this!
     """
-    def __init__(self, app, pos, size, ux = None, draggable = False, **kwargs):
+    def __init__(self, app, pos, size, ux = None, **kwargs):
         kwargs['visible'] = False
         kwargs['anchor'] = 'tl'
-        super().__init__(app, pos, size, ux, draggable, **kwargs)
+        super().__init__(app, pos, size, ux, **kwargs)
         self.sub = []
     def set_subs(self, subs: list[dict]):
         """
