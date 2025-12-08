@@ -10,7 +10,7 @@ class UISpinBox(UIElement):
         kwargs['anchor'] = 'tl'
         self.increment_by = increment_by
         self.round_by = round_by
-        super().__init__(app, pos, Vector2(80,16), None, False, **kwargs)
+        super().__init__(app, pos, Vector2(80,16), None, **kwargs)
         
         ux = [
             [UXRect(-1,Color('#242424' if i < 1 else '#484848'),size=Vector2(16,16)),
