@@ -1,6 +1,6 @@
 from pig_ui.constants import *
-from pig_ui.ui.ux_element import UXWrapper, UIELEMENT_DEFAULT, UIELEMENT_TEXT, UXText, UXRect
-from pig_ui.ui.ui_manager import UIM
+from pig_ui.ux_element import UXWrapper, UIELEMENT_DEFAULT, UIELEMENT_TEXT, UXText, UXRect
+from pig_ui.ui_manager import UIM
 from pig_ui.events import Events
 
 class UIGroup:
