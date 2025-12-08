@@ -36,6 +36,14 @@ Checks all events and set the `self.is_running` to false
         
         
 
+# ./pig_ui/bezier.py
+
+## draw_beziere
+Draws a smooth cubic Bezier curve onto the specified screen surface.
+
+## compute_bezier_points
+Computes a set of discrete points along a cubic Bezier curve.
+
 # ./pig_ui/constants.py
 
 # ./pig_ui/events.py
@@ -68,19 +76,7 @@ More info in the Events.docstring
 
 # ./pig_ui/modules.py
 
-# ./pig_ui/__init__.py
-
-# ./pig_ui/ui/bezier.py
-
-## draw_beziere
-Draws a smooth cubic Bezier curve onto the specified screen surface.
-
-## compute_bezier_points
-Computes a set of discrete points along a cubic Bezier curve.
-
-# ./pig_ui/ui/constants.py
-
-# ./pig_ui/ui/ui_colorpicker.py
+# ./pig_ui/ui_colorpicker.py
 
 ## convert_hsv_to_rgb
 Converts HSV to RGB
@@ -139,7 +135,7 @@ Creates a new color_rect.
 ## update_color
 Sets the color based on user-input.
 
-# ./pig_ui/ui/ui_dropdown.py
+# ./pig_ui/ui_dropdown.py
 
 ## UIDropDown
 A DropDown Menu.
@@ -175,7 +171,7 @@ None or
 ]
 ```
 
-# ./pig_ui/ui/ui_element.py
+# ./pig_ui/ui_element.py
 
 ## UIGroup
 Used for group-wise ignoring in the UIM.
@@ -288,7 +284,7 @@ Behind the UX a debug-rect will be drawn.
 ## destroy
 Simply destroys the Element.
 
-# ./pig_ui/ui/ui_manager.py
+# ./pig_ui/ui_manager.py
 
 ## add_to_queue
 This adds a ``UIElement`` to the render queue.
@@ -315,7 +311,7 @@ This is a fix/workaround for this
 ## uids
 Gets the uids for all elements in the `QUEUE`
 
-# ./pig_ui/ui/ui_menu.py
+# ./pig_ui/ui_menu.py
 
 ## UIMenuBar
 A graphical element at the top-left of the screen that provides a collection of commands and options for the application.
@@ -341,7 +337,7 @@ Format:
 }
 ```
 
-# ./pig_ui/ui/ui_sidebar.py
+# ./pig_ui/ui_sidebar.py
 
 ## UISideBar
 The SideBar is used for e.g.:
@@ -356,7 +352,7 @@ Closes the sidebar.
 ## roll_out
 Opens the sidebar.
 
-# ./pig_ui/ui/ui_spinbox.py
+# ./pig_ui/ui_spinbox.py
 
 ## UISpinBox
 A SpinBox, simply a TextInput with two Buttons, one for incrementing the current number & the other for decrementing it. 
@@ -371,7 +367,7 @@ Calling this function will increment the number stored in `self.inp`
 ## dec_num
 Calling this function will decrement the number stored in `self.inp`
 
-# ./pig_ui/ui/ui_textinput.py
+# ./pig_ui/ui_textinput.py
 
 ## SpecialKeyStates
 These States determine in Special how to manage the key
@@ -447,7 +443,7 @@ Disables editing, should only be called by Self
 Updates text, special_keys etc.
 Should only be called by Self
 
-# ./pig_ui/ui/ux_element.py
+# ./pig_ui/ux_element.py
 
 ## UX4Param
 A Parameter Object used to determine rect-boundings
@@ -536,4 +532,8 @@ sets the mode, usually called by the UIElement.
 *1: hover
 *2: click
 *3: disabled(unused currently)
+
+# ./pig_ui/__init__.py
+
+# ./pig_ui/ui/constants.py
 
