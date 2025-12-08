@@ -1,6 +1,6 @@
-from pig_ui.ui.ui_element import UIElement
-from pig_ui.ui.ui_textinput import UITextInput
-from pig_ui.ui.ux_element import UXWrapper, UXText, UXRect
+from pig_ui.ui_element import UIElement
+from pig_ui.ui_textinput import UITextInput
+from pig_ui.ux_element import UXWrapper, UXText, UXRect
 from pig_ui.constants import *
 class UISpinBox(UIElement): 
     """
@@ -11,7 +11,6 @@ class UISpinBox(UIElement):
         self.increment_by = increment_by
         self.round_by = round_by
         super().__init__(app, pos, Vector2(80,16), None, False, **kwargs)
-        
         
         ux = [
             [UXRect(-1,Color('#242424' if i < 1 else '#484848'),size=Vector2(16,16)),
