@@ -1,5 +1,16 @@
 from pig_ui.modules import *
-
+class Anchors:
+    TOP_LEFT = 'tl'
+    TOP_CENTER = 'tc'
+    TOP_RIGHT = 'tr'
+    
+    CCENTER = 'cc'
+    CENTER_LEFT = 'cl'
+    CENTER_RIGHT = 'cr'
+    
+    BOTTOM_LEFT = 'bl'
+    BOTTOM_RIGHT = 'br'
+    BOTTOM_CENTER = 'bc'
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
