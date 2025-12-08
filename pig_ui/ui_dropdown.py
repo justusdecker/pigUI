@@ -1,7 +1,7 @@
 from pig_ui.constants import *
-from pig_ui.ui.ux_element import UXWrapper, UXText, UXRect
-from pig_ui.ui.ui_element import UIElement
-from pig_ui.ui.ui_manager import UIM
+from pig_ui.ux_element import UXWrapper, UXText, UXRect
+from pig_ui.ui_element import UIElement
+from pig_ui.ui_manager import UIM
 class UIDropDown(UIElement):
     """
     A DropDown Menu.
