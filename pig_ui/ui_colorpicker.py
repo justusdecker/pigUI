@@ -74,9 +74,9 @@ class UIColorPickerRect(UIElement):
     """
     This is used to easy update & read the color-rect
     """
-    def __init__(self, app, pos, size, ux = None, draggable = False, **kwargs):
+    def __init__(self, app, pos, size, ux = None, **kwargs):
         
-        super().__init__(app, pos, size, ux, draggable, **kwargs)
+        super().__init__(app, pos, size, ux, **kwargs)
     
     def draw(self):
         """
@@ -95,9 +95,9 @@ class UIColorPickerLine(UIElement):
     """
     This is used to easy update & read the hue-line
     """
-    def __init__(self, app, pos, size, ux = None, draggable = False, **kwargs):
+    def __init__(self, app, pos, size, ux = None, **kwargs):
         
-        super().__init__(app, pos, size, ux, draggable, **kwargs)
+        super().__init__(app, pos, size, ux, **kwargs)
     
     def draw(self):
         """
@@ -125,8 +125,13 @@ class UIColorInput(UITextInput):
     Inherited from the Default TextInput.
     """
     def __init__(self, app, pos, size, ux=None, draggable=False, multiline = False, max_length = -1, type = 2, **kwargs):
-        
-        super().__init__(app, pos, size, ux, draggable, multiline, max_length, type, **kwargs)
+        kwargs |= {
+            'draggable': draggable,
+            'multiline': multiline,
+            'max_length': max_length,
+            'type': type
+        }
+        super().__init__(app, pos, size, ux, **kwargs)
     
     def update(self):
         """
@@ -168,7 +173,8 @@ class UIColorPicker(UIElement):
              UXText(color=Color('#969696'),text_get_callback=lambda : "Color")] for i in range(4)
         ]
         kwargs['anchor'] = 'tl'
-        super().__init__(app, pos, Vector2(144,216), UXWrapper(ux), True, **kwargs)
+        kwargs['draggable'] = True
+        super().__init__(app, pos, Vector2(144,216), UXWrapper(ux), **kwargs)
 
         self.ux_color_rect = UXImage(Vector2(0,0),color_rect(0.2, 128),True)
         self.ux_color_line = UXImage(Vector2(0,0),color_line(Vector2(128,8)),True)
