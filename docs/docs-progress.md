@@ -67,6 +67,7 @@
 |[get_blocked_state](../pig_ui/ui_manager.py)|function|🔴|
 |[get_dead_uie](../pig_ui/ui_manager.py)|function|🟢|
 |[get_key_reset](../pig_ui/ui_manager.py)|function|🔴|
+|[object_out_of_bounds_check](../pig_ui/ui_manager.py)|function|🔴|
 |[update](../pig_ui/ui_manager.py)|function|🔴|
 |[draw](../pig_ui/ui_manager.py)|function|🔴|
 |[uids](../pig_ui/ui_manager.py)|function|🟢|
