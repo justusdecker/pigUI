@@ -1,3 +1,4 @@
+from pig_ui.constants import SCREEN_HEIGHT, SCREEN_WIDTH
 class UIManager:
     def __init__(self):
         self.QUEUE = []
@@ -75,6 +76,14 @@ class UIManager:
     def get_key_reset(object) -> bool:
         return hasattr(object, 'pressed_keys') and object.pressed_keys and not object.event.KEYS
     
+    def object_out_of_bounds_check(self, obj):
+        x, y = obj.abs_offset.x, obj.abs_offset.y
+        w, h = obj.size.x, obj.size.y
+        i, j = x + w, y + h
+        return i < 0 or j < 0 or i > SCREEN_WIDTH or j > SCREEN_HEIGHT
+        
+        ...
+    
     def update(self, groups: list | tuple | None = None):
         ids = self.__get_ordered_by_layers()
         ids = ids[0] + ids[1]
@@ -85,6 +94,9 @@ class UIManager:
             if UIManager.get_dead_uie(object, self.blocked):
                 self.blocked = -1
                 break
+            
+            if self.object_out_of_bounds_check(object):
+                continue
             
             if UIManager.get_skip_unwanted_groups(object,groups):
                 continue
@@ -105,6 +117,8 @@ class UIManager:
     def draw(self, ids, groups):
         for id in ids:
             object = self.__get_object_by_id(id)
+            if self.object_out_of_bounds_check(object):
+                continue
             if not object.visible or \
                 (groups and not object.group in groups):
                 # Skip unwanted groups & not visible uie's
