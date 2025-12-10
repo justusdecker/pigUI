@@ -93,13 +93,11 @@ class UIManager:
             
             if UIManager.get_dead_uie(object, self.blocked):
                 self.blocked = -1
-                object.is_dragged = False # Prevents errors in Node-Editor
                 break
             
             if self.object_out_of_bounds_check(object):
                 UIManager.get_dead_uie(object, self.blocked)
                 self.blocked = -1
-                object.is_dragged = False # Prevents errors in Node-Editor
                 continue
             
             if UIManager.get_skip_unwanted_groups(object,groups):
