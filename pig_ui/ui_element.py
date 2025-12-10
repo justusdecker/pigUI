@@ -200,6 +200,14 @@ class UIElement:
         """
         return self.event.MOUSE_POS - self.abs_offset
     
+    @property
+    def inbounds(self) -> bool:
+        i, j = self.abs_offset.x + self.size.x, self.abs_offset.y + self.size.y
+        return i < 0 or j < 0 or i > SCREEN_WIDTH or j > SCREEN_HEIGHT
+    
+    def reset_drag(self):
+        self.is_dragging = False
+    
     def mouse_interaction(self):
         """
         Processes:
