@@ -95,9 +95,10 @@ class UIManager:
                 self.blocked = -1
                 break
             
-            if self.object_out_of_bounds_check(object):
+            if object.inbounds():
                 UIManager.get_dead_uie(object, self.blocked)
                 self.blocked = -1
+                print(object.uid)
                 continue
             
             if UIManager.get_skip_unwanted_groups(object,groups):
