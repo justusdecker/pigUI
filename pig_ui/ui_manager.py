@@ -98,7 +98,8 @@ class UIManager:
             if object.inbounds():
                 UIManager.get_dead_uie(object, self.blocked)
                 self.blocked = -1
-                print(object.uid)
+                if hasattr(object, 'reset_drag'):
+                    object.reset_drag()
                 continue
             
             if UIManager.get_skip_unwanted_groups(object,groups):
