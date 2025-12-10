@@ -49,6 +49,8 @@
 |[abs_offset](../pig_ui/ui_element.py)|function|🟢|
 |[root_parent](../pig_ui/ui_element.py)|function|🟢|
 |[get_internal_mouse_pos](../pig_ui/ui_element.py)|function|🟡|
+|[inbounds](../pig_ui/ui_element.py)|function|🔴|
+|[reset_drag](../pig_ui/ui_element.py)|function|🔴|
 |[mouse_interaction](../pig_ui/ui_element.py)|function|🟢|
 |[mouse_interaction_ex](../pig_ui/ui_element.py)|function|🟢|
 |[keyboard_interaction](../pig_ui/ui_element.py)|function|🟡|
