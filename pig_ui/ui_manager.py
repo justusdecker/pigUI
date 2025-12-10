@@ -95,7 +95,7 @@ class UIManager:
                 self.blocked = -1
                 break
             
-            if object.inbounds():
+            if object.inbounds:
                 UIManager.get_dead_uie(object, self.blocked)
                 self.blocked = -1
                 if hasattr(object, 'reset_drag'):
